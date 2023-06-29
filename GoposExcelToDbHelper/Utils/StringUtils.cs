@@ -8,8 +8,28 @@ namespace GoposExcelToDbHelper.Utils
 {
     public static class StringUtils
     {
+        // HI_IM_SAMPLE => hiImSample
         public static string ToSnakeCase(this string value)
         {
+            string[] words = value.ToLower().Split('_');
+
+            StringBuilder camelCaseBuilder = new StringBuilder();
+            camelCaseBuilder.Append(words[0]);
+
+            for (int i = 1; i < words.Length; i++)
+            {
+                string word = words[i];
+                string capitalizedWord = char.ToUpper(word[0]) + word.Substring(1);
+                camelCaseBuilder.Append(capitalizedWord);
+            }
+
+            return camelCaseBuilder.ToString();
+        }
+
+        // HI_IM_SAMPLE => HiImSample
+        public static string ToSnakeCase(this string value, string prefix)
+        {
+            value = $"{prefix}_{value}";
             string[] words = value.ToLower().Split('_');
 
             StringBuilder camelCaseBuilder = new StringBuilder();

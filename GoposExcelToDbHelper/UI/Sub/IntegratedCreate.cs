@@ -53,6 +53,11 @@ namespace GoposExcelToDbHelper
 
             cbx_engine.SelectedIndex = 0;
             cbx_charset.SelectedIndex = 0;
+
+            tbx_create.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
+            tbx_erd.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
+            tbx_vo.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
+            tbx_mapper.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
         }
 
         private void btn_create_Click(object sender, EventArgs e)
