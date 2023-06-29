@@ -1,4 +1,5 @@
-﻿using GoposExcelToDbHelper.Utils;
+﻿using GoposExcelToDbHelper.Properties;
+using GoposExcelToDbHelper.Utils;
 using GoposExcelToDbHelper.VO;
 using MemoHelper.Util;
 using Microsoft.Toolkit.Uwp.Notifications;
@@ -37,6 +38,20 @@ namespace GoposExcelToDbHelper
 
         private void Main_Load(object sender, EventArgs e)
         {
+            InitWindow();
+        }
+
+        private void InitWindow()
+        {
+            // 프로젝트 경로 조회
+            tbx_projectPath.Text = Settings.Default.projectPath;
+
+            // 폰트 설정
+            tbx_create.Font = new Font(FontFamily.GenericMonospace, tbx_create.Font.Size);
+            tbx_erd.Font = new Font(FontFamily.GenericMonospace, tbx_erd.Font.Size);
+            tbx_vo.Font = new Font(FontFamily.GenericMonospace, tbx_vo.Font.Size);
+            tbx_mapper.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
+
             // 엔진 add
             cbx_engine.Items.Add("InnoDB");
             //cbx_engine.Items.Add("MyISAM");
@@ -53,11 +68,6 @@ namespace GoposExcelToDbHelper
 
             cbx_engine.SelectedIndex = 0;
             cbx_charset.SelectedIndex = 0;
-
-            tbx_create.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
-            tbx_erd.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
-            tbx_vo.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
-            tbx_mapper.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
         }
 
         private void btn_create_Click(object sender, EventArgs e)
@@ -262,6 +272,21 @@ entity ""{table}"" as {table.ToSnakeCase()} {{{pkErd}{separateLine}{colErd}
             var mapper = MybatisMapperMaker.GetMapper(table, cols);
 
             tbx_mapper.Text = mapper;
+        }
+
+        private void btn_findPath_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                fbd.RootFolder = Environment.SpecialFolder.MyComputer;
+
+                if (fbd.ShowDialog().Equals(DialogResult.OK))
+                {
+                    tbx_projectPath.Text = fbd.SelectedPath;
+                    Settings.Default.projectPath = fbd.SelectedPath;
+                    Settings.Default.Save();
+                }
+            }
         }
     }
 }
