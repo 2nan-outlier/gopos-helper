@@ -25,7 +25,7 @@ namespace GoposExcelToDbHelper
 
         private void btn_create_Click(object sender, EventArgs e)
         {
-            Create create = new Create();
+            IntegratedCreate create = new IntegratedCreate();
             create.Show();
         }
 
