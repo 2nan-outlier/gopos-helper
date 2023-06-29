@@ -98,7 +98,7 @@ namespace GoposExcelToDbHelper.Utils
             mapper += $"\r\n    WHERE";
             mapper += $"{deleteVals}";
             mapper += $"\r\n  </delete>";
-            mapper += $"</mapper>";
+            mapper += $"\r\n</mapper>";
 
             return mapper;
         }

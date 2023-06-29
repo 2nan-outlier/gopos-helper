@@ -177,7 +177,6 @@ namespace GoposExcelToDbHelper
 
             return true;
         }
-        
 
         private void SetCreateQuery()
         {
@@ -191,11 +190,11 @@ namespace GoposExcelToDbHelper
             }
 
             // 컬럼 쿼리 생성
-            var column = string.Join(",\r\n", colQuerys);
+            var column = string.Join(",\r\n  ", colQuerys);
 
             // 제약조건 쿼리 생성
             var pk = (pks.Count != 0 ? $", PRIMARY KEY ({string.Join(",", pks)})" : "");
-            var fk = "";
+            var fk = string.Empty;
             foreach (var fkTable in fks)
             {
                 fk += $", CONSTRAINT `fk_{fkTable.table.ToLower()}_{table.ToLower()}_{fks.IndexOf(fkTable) + 1}` FOREIGN KEY (`{fkTable.name}`) REFERENCES `{fkTable.table}` (`{fkTable.name}`)";
@@ -205,18 +204,18 @@ namespace GoposExcelToDbHelper
                     fk += "\r\n";
                 }
             }
-            var unique = (unqs.Count != 0 ? $", CONSTRAINT {table.ToLower()}_uk UNIQUE ({string.Join(",", unqs)})" : "");
-            var index = (idxs.Count != 0 ? $", INDEX {table.ToLower()}_idx ({string.Join(",", idxs)})" : "");
+            var unique = (unqs.Count != 0 ? $", CONSTRAINT {table.ToLower()}_uk UNIQUE ({string.Join(",", unqs)})" : string.Empty);
+            var index = (idxs.Count != 0 ? $", INDEX {table.ToLower()}_idx ({string.Join(",", idxs)})" : string.Empty);
 
             // 쿼리 통합
-            var query =
-$@"CREATE TABLE `{table}` (
-{column}
-{pk}
-{fk}
-{unique}
-{index}
-) ENGINE={dbEngine} DEFAULT CHARSET={dbCharset}";
+            var query = string.Empty;
+            query += $"CREATE TABLE `{table}` (";
+            query += $"\r\n  {column}";
+            query += $"\r\n  {pk}";
+            query += string.IsNullOrEmpty(fk) ? string.Empty : $"\r\n  {fk}";
+            query += string.IsNullOrEmpty(unique) ? string.Empty : $"\r\n  {unique}";
+            query += string.IsNullOrEmpty(index) ? string.Empty : $"\r\n  {index}";
+            query += $"\r\n) ENGINE={dbEngine} DEFAULT CHARSET={dbCharset}";
 
             tbx_create.Text = query;
 
