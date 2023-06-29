@@ -1,0 +1,14 @@
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+# Build results
+Debug/
+Release/
+Releases/
+x64/
+x86/
+bin/
+obj/
+
+# File
+*.cache
