@@ -34,5 +34,89 @@ namespace GoposExcelToDbHelper.Properties {
                 this["projectPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dbHost {
+            get {
+                return ((string)(this["dbHost"]));
+            }
+            set {
+                this["dbHost"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dbPort {
+            get {
+                return ((string)(this["dbPort"]));
+            }
+            set {
+                this["dbPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dbSchema {
+            get {
+                return ((string)(this["dbSchema"]));
+            }
+            set {
+                this["dbSchema"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dbUserId {
+            get {
+                return ((string)(this["dbUserId"]));
+            }
+            set {
+                this["dbUserId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dbUserPw {
+            get {
+                return ((string)(this["dbUserPw"]));
+            }
+            set {
+                this["dbUserPw"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isTestConnection {
+            get {
+                return ((bool)(this["isTestConnection"]));
+            }
+            set {
+                this["isTestConnection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isCreateTable {
+            get {
+                return ((bool)(this["isCreateTable"]));
+            }
+            set {
+                this["isCreateTable"] = value;
+            }
+        }
     }
 }

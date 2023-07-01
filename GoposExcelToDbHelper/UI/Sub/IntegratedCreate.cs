@@ -1,4 +1,5 @@
 ﻿using GoposExcelToDbHelper.Properties;
+using GoposExcelToDbHelper.UI.Popup;
 using GoposExcelToDbHelper.Utils;
 using GoposExcelToDbHelper.VO;
 using MemoHelper.Util;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace GoposExcelToDbHelper
     public partial class IntegratedCreate : MetroFramework.Forms.MetroForm
     {
         private string excelData => tbx_text.Text;
+        private string projectPath => tbx_projectPath.Text;
         private string dbEngine => cbx_engine.SelectedItem.ToString();
         private string dbCharset => cbx_charset.SelectedItem.ToString();
 
@@ -49,14 +52,13 @@ namespace GoposExcelToDbHelper
             // 폰트 설정
             tbx_create.Font = new Font(FontFamily.GenericMonospace, tbx_create.Font.Size);
             tbx_erd.Font = new Font(FontFamily.GenericMonospace, tbx_erd.Font.Size);
-            tbx_vo.Font = new Font(FontFamily.GenericMonospace, tbx_vo.Font.Size);
             tbx_mapper.Font = new Font(FontFamily.GenericMonospace, tbx_mapper.Font.Size);
 
             // 엔진 add
             cbx_engine.Items.Add("InnoDB");
             //cbx_engine.Items.Add("MyISAM");
             //cbx_engine.Items.Add("ndbcluster");
-            //cbx_engine.Items.Add("MEMORY");
+            cbx_engine.Items.Add("MEMORY");
             //cbx_engine.Items.Add("FEDERATED");
             //cbx_engine.Items.Add("ARCHIVE");
             //cbx_engine.Items.Add("CSV");
@@ -68,18 +70,11 @@ namespace GoposExcelToDbHelper
 
             cbx_engine.SelectedIndex = 0;
             cbx_charset.SelectedIndex = 0;
-        }
 
-        private void btn_create_Click(object sender, EventArgs e)
-        {
-            Create create = new Create();
-            create.Show();
-        }
-
-        private void btn_insert_Click(object sender, EventArgs e)
-        {
-            Insert insert = new Insert();
-            insert.Show();
+            if (Settings.Default.isTestConnection)
+            {
+                cbx_createTable.Checked = Settings.Default.isCreateTable;
+            }
         }
 
         private void btn_change_Click(object sender, EventArgs e)
@@ -87,10 +82,16 @@ namespace GoposExcelToDbHelper
             if (!Validation()) return;
             if (!DisassembleExcelData()) return;
 
+            SetLogLine();
+
             SetCreateQuery();
             SetErd();
             SetVo();
             SetMapper();
+
+            CreateClassFile();
+
+            SetLogLine();
 
             string toastXmlString =
    $@"<toast><visual>
@@ -227,9 +228,8 @@ namespace GoposExcelToDbHelper
             query += string.IsNullOrEmpty(index) ? string.Empty : $"\r\n  {index}";
             query += $"\r\n) ENGINE={dbEngine} DEFAULT CHARSET={dbCharset}";
 
+            gb_create.Text = $"{table}.sql";
             tbx_create.Text = query;
-
-            //Clipboard.SetText(tbx_result.Text);
         }
 
         private void SetErd()
@@ -271,7 +271,30 @@ entity ""{table}"" as {table.ToSnakeCase()} {{{pkErd}{separateLine}{colErd}
         {
             var mapper = MybatisMapperMaker.GetMapper(table, cols);
 
+            gb_mapper.Text = $"{table.ToSnakeCase("")}Mapper.xml";
             tbx_mapper.Text = mapper;
+        }
+
+        private void SetLogLine()
+        {
+            lbx_log.Items.Add("==========================================");
+        }
+
+        private void CreateClassFile()
+        {
+            if (!cbx_createFile.Checked)
+            {
+                return;
+            }
+
+            DirectoryInfo di = new DirectoryInfo(projectPath);
+            if (!di.Exists)
+            {
+                Msg.Warning("폴더가 존재하지 않습니다.");
+                return;
+            }
+
+            // src\main\java\gopos
         }
 
         private void btn_findPath_Click(object sender, EventArgs e)
@@ -287,6 +310,41 @@ entity ""{table}"" as {table.ToSnakeCase()} {{{pkErd}{separateLine}{colErd}
                     Settings.Default.Save();
                 }
             }
+        }
+
+        private void btn_connectDb_Click(object sender, EventArgs e)
+        {
+            ConnectDatabasePopup connectDatabasePopup = new ConnectDatabasePopup();
+            connectDatabasePopup.ShowDialog();
+        }
+
+        private void cbx_createFile_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbx_createFile.Checked)
+            {
+                tbx_createFilePath.Enabled = true;
+                tbx_createFilePath.ReadOnly = false;
+            }
+            else
+            {
+                tbx_createFilePath.Enabled = false;
+                tbx_createFilePath.ReadOnly = true;
+            }
+        }
+
+        private void cbx_createTable_Click(object sender, EventArgs e)
+        {
+            if (!Settings.Default.isTestConnection)
+            {
+                Msg.Info("DB 연결을 먼저 진행해주세요.");
+                cbx_createTable.Checked = false;
+            }
+        }
+
+        private void cbx_createTable_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.isCreateTable = cbx_createTable.Checked;
+            Settings.Default.Save();
         }
     }
 }

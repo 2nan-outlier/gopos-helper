@@ -20,7 +20,6 @@ namespace GoposExcelToDbHelper.Utils
 
             var maxColLength = cols.Max(x => x.name.Length) * 2 + 5;
 
-            insertCols = string.Join(", ", cols.Select(x => x.name).ToList());
             foreach (ColumnInfo col in cols)
             {
                 // ============================= select =============================
@@ -32,6 +31,8 @@ namespace GoposExcelToDbHelper.Utils
                 // ============================= insert =============================
                 // insert, update, delete는 CREATED_AT, UPDATED_AT 사용 안함
                 if (col.name.Equals("CREATED_AT") || col.name.Equals("UPDATED_AT")) continue;
+                insertCols += $"{col.name}";
+                insertCols += cols.IndexOf(col) == cols.Count - 1 ? string.Empty : ",";
 
                 insertVals += $"\r\n      {col.name} = #{{{col.name.ToSnakeCase()}}}";
                 insertVals += cols.IndexOf(col) == cols.Count - 1 ? string.Empty : ",";
@@ -57,6 +58,19 @@ namespace GoposExcelToDbHelper.Utils
                 // ==================================================================
             }
 
+            if (insertCols.Last().Equals(','))
+            {
+                insertCols = insertCols.Substring(0, insertCols.Length - 1);
+            }
+            if (insertVals.Last().Equals(','))
+            {
+                insertVals = insertVals.Substring(0, insertVals.Length - 1);
+            }
+            if (updateCols.Last().Equals(','))
+            {
+                updateCols = updateCols.Substring(0, updateCols.Length - 1);
+            }
+
             var mapper = string.Empty;
 
             mapper += $"<?xml version=\"1.0\" encoding=\"UTF - 8\"?>";
@@ -76,7 +90,7 @@ namespace GoposExcelToDbHelper.Utils
             mapper += $"\r\n    /* {"주석"} */";
             mapper += $"\r\n    INSERT INTO";
             mapper += $"\r\n      {table}";
-            mapper += $"\r\n       ({insertCols})";
+            mapper += $"\r\n      ({insertCols})";
             mapper += $"\r\n    VALUES";
             mapper += $"{insertVals}";
             mapper += $"\r\n  </inesrt>";
