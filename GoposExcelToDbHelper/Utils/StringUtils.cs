@@ -9,7 +9,7 @@ namespace GoposExcelToDbHelper.Utils
     public static class StringUtils
     {
         // HI_IM_SAMPLE => hiImSample
-        public static string ToSnakeCase(this string value)
+        public static string ToCamelCase(this string value)
         {
             string[] words = value.ToLower().Split('_');
 
@@ -27,7 +27,7 @@ namespace GoposExcelToDbHelper.Utils
         }
 
         // HI_IM_SAMPLE => HiImSample
-        public static string ToSnakeCase(this string value, string prefix)
+        public static string ToCamelCase(this string value, string prefix)
         {
             value = $"{prefix}_{value}";
             string[] words = value.ToLower().Split('_');
@@ -43,6 +43,11 @@ namespace GoposExcelToDbHelper.Utils
             }
 
             return camelCaseBuilder.ToString();
+        }
+
+        public static string StartLowerCase(this string value)
+        {
+            return value.Substring(0, 1).ToLower() + value.Substring(1);
         }
     }
 }

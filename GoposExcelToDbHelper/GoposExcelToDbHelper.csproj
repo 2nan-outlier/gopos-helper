@@ -85,6 +85,7 @@
     <Compile Include="UI\Sub\Insert.Designer.cs">
       <DependentUpon>Insert.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ClassFileMaker.cs" />
     <Compile Include="Utils\LogHelper.cs" />
     <Compile Include="Utils\Msg.cs" />
     <Compile Include="Utils\MybatisMapperMaker.cs" />

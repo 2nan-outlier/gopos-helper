@@ -31,20 +31,28 @@
             this.tc_main = new System.Windows.Forms.TabControl();
             this.tp_excel = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_change = new MetroFramework.Controls.MetroButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbx_text = new MetroFramework.Controls.MetroTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_findPath = new MetroFramework.Controls.MetroButton();
             this.tbx_projectPath = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_connectDb = new MetroFramework.Controls.MetroButton();
+            this.cbx_createTable = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbx_createFilePath = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.cbx_createFile = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn_change = new MetroFramework.Controls.MetroButton();
             this.cbx_charset = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.cbx_engine = new MetroFramework.Controls.MetroComboBox();
@@ -68,17 +76,9 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_clearLog = new MetroFramework.Controls.MetroButton();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.cbx_createTable = new System.Windows.Forms.CheckBox();
             this.lbx_log = new System.Windows.Forms.ListBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cbx_createFile = new System.Windows.Forms.CheckBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.btn_findPath = new MetroFramework.Controls.MetroButton();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.tbx_createFilePath = new MetroFramework.Controls.MetroTextBox();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.cbx_createFileMode = new MetroFramework.Controls.MetroComboBox();
+            this.tbx_result = new MetroFramework.Controls.MetroTextBox();
             this.tc_main.SuspendLayout();
             this.tp_excel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -91,8 +91,11 @@
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tb_create.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -106,9 +109,6 @@
             this.tp_log.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tc_main
@@ -142,17 +142,31 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.btn_change, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(845, 472);
             this.tableLayoutPanel1.TabIndex = 9;
+            // 
+            // btn_change
+            // 
+            this.btn_change.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_change.Location = new System.Drawing.Point(3, 436);
+            this.btn_change.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btn_change.Name = "btn_change";
+            this.btn_change.Size = new System.Drawing.Size(839, 32);
+            this.btn_change.TabIndex = 10;
+            this.btn_change.Text = "실행";
+            this.btn_change.UseSelectable = true;
+            this.btn_change.Click += new System.EventHandler(this.btn_change_Click);
             // 
             // splitContainer1
             // 
@@ -168,7 +182,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(839, 414);
+            this.splitContainer1.Size = new System.Drawing.Size(839, 374);
             this.splitContainer1.SplitterDistance = 380;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 5;
@@ -181,7 +195,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(380, 414);
+            this.groupBox1.Size = new System.Drawing.Size(380, 374);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "엑셀 텍스트";
@@ -192,10 +206,10 @@
             // 
             // 
             this.tbx_text.CustomButton.Image = null;
-            this.tbx_text.CustomButton.Location = new System.Drawing.Point(-12, 2);
+            this.tbx_text.CustomButton.Location = new System.Drawing.Point(28, 2);
             this.tbx_text.CustomButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbx_text.CustomButton.Name = "";
-            this.tbx_text.CustomButton.Size = new System.Drawing.Size(383, 383);
+            this.tbx_text.CustomButton.Size = new System.Drawing.Size(343, 343);
             this.tbx_text.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbx_text.CustomButton.TabIndex = 1;
             this.tbx_text.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -214,7 +228,7 @@
             this.tbx_text.SelectionLength = 0;
             this.tbx_text.SelectionStart = 0;
             this.tbx_text.ShortcutsEnabled = true;
-            this.tbx_text.Size = new System.Drawing.Size(374, 388);
+            this.tbx_text.Size = new System.Drawing.Size(374, 348);
             this.tbx_text.TabIndex = 2;
             this.tbx_text.UseSelectable = true;
             this.tbx_text.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -228,7 +242,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(454, 414);
+            this.groupBox2.Size = new System.Drawing.Size(454, 374);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "옵션";
@@ -247,7 +261,7 @@
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(448, 392);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(448, 352);
             this.tableLayoutPanel7.TabIndex = 13;
             // 
             // tableLayoutPanel5
@@ -267,6 +281,18 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(442, 34);
             this.tableLayoutPanel5.TabIndex = 15;
+            // 
+            // btn_findPath
+            // 
+            this.btn_findPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_findPath.Location = new System.Drawing.Point(339, 4);
+            this.btn_findPath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btn_findPath.Name = "btn_findPath";
+            this.btn_findPath.Size = new System.Drawing.Size(100, 26);
+            this.btn_findPath.TabIndex = 11;
+            this.btn_findPath.Text = "찾기";
+            this.btn_findPath.UseSelectable = true;
+            this.btn_findPath.Click += new System.EventHandler(this.btn_findPath_Click);
             // 
             // tbx_projectPath
             // 
@@ -329,8 +355,21 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(442, 350);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(442, 310);
             this.tableLayoutPanel8.TabIndex = 16;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.tbx_result);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(3, 172);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox4.Size = new System.Drawing.Size(436, 136);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "결과";
             // 
             // groupBox3
             // 
@@ -373,9 +412,109 @@
             this.btn_connectDb.UseSelectable = true;
             this.btn_connectDb.Click += new System.EventHandler(this.btn_connectDb_Click);
             // 
+            // cbx_createTable
+            // 
+            this.cbx_createTable.AutoSize = true;
+            this.cbx_createTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbx_createTable.Location = new System.Drawing.Point(3, 3);
+            this.cbx_createTable.Name = "cbx_createTable";
+            this.cbx_createTable.Size = new System.Drawing.Size(209, 38);
+            this.cbx_createTable.TabIndex = 1;
+            this.cbx_createTable.Text = "테이블 자동 생성 여부";
+            this.cbx_createTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbx_createTable.UseVisualStyleBackColor = true;
+            this.cbx_createTable.CheckedChanged += new System.EventHandler(this.cbx_createTable_CheckedChanged);
+            this.cbx_createTable.Click += new System.EventHandler(this.cbx_createTable_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.tableLayoutPanel10);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox5.Location = new System.Drawing.Point(3, 73);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(436, 94);
+            this.groupBox5.TabIndex = 2;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "파일";
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 2;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.tbx_createFilePath, 1, 1);
+            this.tableLayoutPanel10.Controls.Add(this.metroLabel1, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.cbx_createFile, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.cbx_createFileMode, 1, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 21);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 2;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(430, 70);
+            this.tableLayoutPanel10.TabIndex = 0;
+            // 
+            // tbx_createFilePath
+            // 
+            // 
+            // 
+            // 
+            this.tbx_createFilePath.CustomButton.Image = null;
+            this.tbx_createFilePath.CustomButton.Location = new System.Drawing.Point(149, 1);
+            this.tbx_createFilePath.CustomButton.Name = "";
+            this.tbx_createFilePath.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.tbx_createFilePath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tbx_createFilePath.CustomButton.TabIndex = 1;
+            this.tbx_createFilePath.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tbx_createFilePath.CustomButton.UseSelectable = true;
+            this.tbx_createFilePath.CustomButton.Visible = false;
+            this.tbx_createFilePath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbx_createFilePath.Lines = new string[0];
+            this.tbx_createFilePath.Location = new System.Drawing.Point(250, 38);
+            this.tbx_createFilePath.MaxLength = 32767;
+            this.tbx_createFilePath.Name = "tbx_createFilePath";
+            this.tbx_createFilePath.PasswordChar = '\0';
+            this.tbx_createFilePath.PromptText = "패키지명을 작성해주세요.";
+            this.tbx_createFilePath.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tbx_createFilePath.SelectedText = "";
+            this.tbx_createFilePath.SelectionLength = 0;
+            this.tbx_createFilePath.SelectionStart = 0;
+            this.tbx_createFilePath.ShortcutsEnabled = true;
+            this.tbx_createFilePath.Size = new System.Drawing.Size(177, 29);
+            this.tbx_createFilePath.TabIndex = 4;
+            this.tbx_createFilePath.UseSelectable = true;
+            this.tbx_createFilePath.WaterMark = "패키지명을 작성해주세요.";
+            this.tbx_createFilePath.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tbx_createFilePath.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.Location = new System.Drawing.Point(3, 35);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(241, 35);
+            this.metroLabel1.TabIndex = 3;
+            this.metroLabel1.Text = "파일 생성 경로 : \\src\\main\\java\\gopos\\";
+            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cbx_createFile
+            // 
+            this.cbx_createFile.AutoSize = true;
+            this.cbx_createFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbx_createFile.Location = new System.Drawing.Point(3, 3);
+            this.cbx_createFile.Name = "cbx_createFile";
+            this.cbx_createFile.Size = new System.Drawing.Size(241, 29);
+            this.cbx_createFile.TabIndex = 2;
+            this.cbx_createFile.Text = "클래스 파일 자동 생성 여부";
+            this.cbx_createFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbx_createFile.UseVisualStyleBackColor = true;
+            this.cbx_createFile.CheckedChanged += new System.EventHandler(this.cbx_createFile_CheckedChanged);
+            // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btn_change);
             this.flowLayoutPanel1.Controls.Add(this.cbx_charset);
             this.flowLayoutPanel1.Controls.Add(this.metroLabel3);
             this.flowLayoutPanel1.Controls.Add(this.cbx_engine);
@@ -388,22 +527,11 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(839, 42);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
-            // btn_change
-            // 
-            this.btn_change.Location = new System.Drawing.Point(750, 4);
-            this.btn_change.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btn_change.Name = "btn_change";
-            this.btn_change.Size = new System.Drawing.Size(86, 36);
-            this.btn_change.TabIndex = 10;
-            this.btn_change.Text = "변환";
-            this.btn_change.UseSelectable = true;
-            this.btn_change.Click += new System.EventHandler(this.btn_change_Click);
-            // 
             // cbx_charset
             // 
             this.cbx_charset.FormattingEnabled = true;
             this.cbx_charset.ItemHeight = 24;
-            this.cbx_charset.Location = new System.Drawing.Point(606, 4);
+            this.cbx_charset.Location = new System.Drawing.Point(698, 4);
             this.cbx_charset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbx_charset.Name = "cbx_charset";
             this.cbx_charset.Size = new System.Drawing.Size(138, 30);
@@ -412,7 +540,7 @@
             // 
             // metroLabel3
             // 
-            this.metroLabel3.Location = new System.Drawing.Point(445, 0);
+            this.metroLabel3.Location = new System.Drawing.Point(537, 0);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(155, 40);
             this.metroLabel3.TabIndex = 11;
@@ -423,7 +551,7 @@
             // 
             this.cbx_engine.FormattingEnabled = true;
             this.cbx_engine.ItemHeight = 24;
-            this.cbx_engine.Location = new System.Drawing.Point(301, 4);
+            this.cbx_engine.Location = new System.Drawing.Point(393, 4);
             this.cbx_engine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbx_engine.Name = "cbx_engine";
             this.cbx_engine.Size = new System.Drawing.Size(138, 30);
@@ -432,7 +560,7 @@
             // 
             // metroLabel4
             // 
-            this.metroLabel4.Location = new System.Drawing.Point(220, 0);
+            this.metroLabel4.Location = new System.Drawing.Point(312, 0);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(75, 40);
             this.metroLabel4.TabIndex = 12;
@@ -749,20 +877,6 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "변환 결과 Log";
             // 
-            // cbx_createTable
-            // 
-            this.cbx_createTable.AutoSize = true;
-            this.cbx_createTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbx_createTable.Location = new System.Drawing.Point(3, 3);
-            this.cbx_createTable.Name = "cbx_createTable";
-            this.cbx_createTable.Size = new System.Drawing.Size(209, 38);
-            this.cbx_createTable.TabIndex = 1;
-            this.cbx_createTable.Text = "테이블 자동 생성 여부";
-            this.cbx_createTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cbx_createTable.UseVisualStyleBackColor = true;
-            this.cbx_createTable.CheckedChanged += new System.EventHandler(this.cbx_createTable_CheckedChanged);
-            this.cbx_createTable.Click += new System.EventHandler(this.cbx_createTable_Click);
-            // 
             // lbx_log
             // 
             this.lbx_log.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -773,135 +887,54 @@
             this.lbx_log.Size = new System.Drawing.Size(833, 388);
             this.lbx_log.TabIndex = 0;
             // 
-            // groupBox4
+            // cbx_createFileMode
             // 
-            this.groupBox4.Controls.Add(this.flowLayoutPanel2);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(3, 172);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox4.Size = new System.Drawing.Size(436, 176);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "결과";
+            this.cbx_createFileMode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbx_createFileMode.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cbx_createFileMode.FontWeight = MetroFramework.MetroComboBoxWeight.Light;
+            this.cbx_createFileMode.FormattingEnabled = true;
+            this.cbx_createFileMode.ItemHeight = 21;
+            this.cbx_createFileMode.Location = new System.Drawing.Point(250, 4);
+            this.cbx_createFileMode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbx_createFileMode.Name = "cbx_createFileMode";
+            this.cbx_createFileMode.Size = new System.Drawing.Size(177, 27);
+            this.cbx_createFileMode.TabIndex = 15;
+            this.cbx_createFileMode.UseSelectable = true;
             // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 20);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(430, 154);
-            this.flowLayoutPanel2.TabIndex = 0;
-            // 
-            // cbx_createFile
-            // 
-            this.cbx_createFile.AutoSize = true;
-            this.cbx_createFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbx_createFile.Location = new System.Drawing.Point(3, 3);
-            this.cbx_createFile.Name = "cbx_createFile";
-            this.cbx_createFile.Size = new System.Drawing.Size(241, 29);
-            this.cbx_createFile.TabIndex = 2;
-            this.cbx_createFile.Text = "클래스 파일 자동 생성 여부";
-            this.cbx_createFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cbx_createFile.UseVisualStyleBackColor = true;
-            this.cbx_createFile.CheckedChanged += new System.EventHandler(this.cbx_createFile_CheckedChanged);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.tableLayoutPanel10);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Location = new System.Drawing.Point(3, 73);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(436, 94);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "파일";
-            // 
-            // btn_findPath
-            // 
-            this.btn_findPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_findPath.Location = new System.Drawing.Point(339, 4);
-            this.btn_findPath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btn_findPath.Name = "btn_findPath";
-            this.btn_findPath.Size = new System.Drawing.Size(100, 26);
-            this.btn_findPath.TabIndex = 11;
-            this.btn_findPath.Text = "찾기";
-            this.btn_findPath.UseSelectable = true;
-            this.btn_findPath.Click += new System.EventHandler(this.btn_findPath_Click);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel1.Location = new System.Drawing.Point(3, 35);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(241, 35);
-            this.metroLabel1.TabIndex = 3;
-            this.metroLabel1.Text = "파일 생성 경로 : \\src\\main\\java\\gopos\\";
-            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tbx_createFilePath
+            // tbx_result
             // 
             // 
             // 
             // 
-            this.tbx_createFilePath.CustomButton.Image = null;
-            this.tbx_createFilePath.CustomButton.Location = new System.Drawing.Point(149, 1);
-            this.tbx_createFilePath.CustomButton.Name = "";
-            this.tbx_createFilePath.CustomButton.Size = new System.Drawing.Size(27, 27);
-            this.tbx_createFilePath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tbx_createFilePath.CustomButton.TabIndex = 1;
-            this.tbx_createFilePath.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tbx_createFilePath.CustomButton.UseSelectable = true;
-            this.tbx_createFilePath.CustomButton.Visible = false;
-            this.tbx_createFilePath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbx_createFilePath.Lines = new string[0];
-            this.tbx_createFilePath.Location = new System.Drawing.Point(250, 38);
-            this.tbx_createFilePath.MaxLength = 32767;
-            this.tbx_createFilePath.Name = "tbx_createFilePath";
-            this.tbx_createFilePath.PasswordChar = '\0';
-            this.tbx_createFilePath.PromptText = "패키지";
-            this.tbx_createFilePath.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tbx_createFilePath.SelectedText = "";
-            this.tbx_createFilePath.SelectionLength = 0;
-            this.tbx_createFilePath.SelectionStart = 0;
-            this.tbx_createFilePath.ShortcutsEnabled = true;
-            this.tbx_createFilePath.Size = new System.Drawing.Size(177, 29);
-            this.tbx_createFilePath.TabIndex = 4;
-            this.tbx_createFilePath.UseSelectable = true;
-            this.tbx_createFilePath.WaterMark = "패키지";
-            this.tbx_createFilePath.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tbx_createFilePath.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 2;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Controls.Add(this.metroLabel2, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.tbx_createFilePath, 1, 1);
-            this.tableLayoutPanel10.Controls.Add(this.metroLabel1, 0, 1);
-            this.tableLayoutPanel10.Controls.Add(this.cbx_createFile, 0, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 21);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 2;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(430, 70);
-            this.tableLayoutPanel10.TabIndex = 0;
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel2.Location = new System.Drawing.Point(250, 0);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(177, 35);
-            this.metroLabel2.TabIndex = 5;
-            this.metroLabel2.Text = "(Controller, Service, DAO)";
-            this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tbx_result.CustomButton.Image = null;
+            this.tbx_result.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.tbx_result.CustomButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbx_result.CustomButton.Name = "";
+            this.tbx_result.CustomButton.Size = new System.Drawing.Size(109, 109);
+            this.tbx_result.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tbx_result.CustomButton.TabIndex = 1;
+            this.tbx_result.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tbx_result.CustomButton.UseSelectable = true;
+            this.tbx_result.CustomButton.Visible = false;
+            this.tbx_result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbx_result.Lines = new string[0];
+            this.tbx_result.Location = new System.Drawing.Point(3, 20);
+            this.tbx_result.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbx_result.MaxLength = 32767;
+            this.tbx_result.Multiline = true;
+            this.tbx_result.Name = "tbx_result";
+            this.tbx_result.PasswordChar = '\0';
+            this.tbx_result.ReadOnly = true;
+            this.tbx_result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbx_result.SelectedText = "";
+            this.tbx_result.SelectionLength = 0;
+            this.tbx_result.SelectionStart = 0;
+            this.tbx_result.ShortcutsEnabled = true;
+            this.tbx_result.Size = new System.Drawing.Size(430, 114);
+            this.tbx_result.TabIndex = 3;
+            this.tbx_result.UseSelectable = true;
+            this.tbx_result.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tbx_result.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // IntegratedCreate
             // 
@@ -928,9 +961,13 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tb_create.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -944,10 +981,6 @@
             this.tp_log.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.tableLayoutPanel10.ResumeLayout(false);
-            this.tableLayoutPanel10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -996,14 +1029,14 @@
         private System.Windows.Forms.CheckBox cbx_createTable;
         private System.Windows.Forms.ListBox lbx_log;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.CheckBox cbx_createFile;
         private System.Windows.Forms.GroupBox groupBox5;
         private MetroFramework.Controls.MetroButton btn_findPath;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTextBox tbx_createFilePath;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroComboBox cbx_createFileMode;
+        private MetroFramework.Controls.MetroTextBox tbx_result;
     }
 }
 

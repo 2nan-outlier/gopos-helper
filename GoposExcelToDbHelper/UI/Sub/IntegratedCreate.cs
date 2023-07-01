@@ -21,10 +21,18 @@ namespace GoposExcelToDbHelper
 {
     public partial class IntegratedCreate : MetroFramework.Forms.MetroForm
     {
+        private const string springBootPath = @"\src\main\java\gopos\";
+        private const int All = 0;
+        private const int Controller = 1;
+        private const int Service = 2;
+        private const int Dao = 3;
+
+
         private string excelData => tbx_text.Text;
         private string projectPath => tbx_projectPath.Text;
         private string dbEngine => cbx_engine.SelectedItem.ToString();
         private string dbCharset => cbx_charset.SelectedItem.ToString();
+
 
         private string[] rows;
         private List<string> pks = new List<string>();
@@ -68,8 +76,16 @@ namespace GoposExcelToDbHelper
             // 캐릭터셋 add
             cbx_charset.Items.Add("utf8mb4");
 
+            // 파일 생성 모드
+            cbx_createFileMode.Items.Add("Controller, Service, DAO");
+            cbx_createFileMode.Items.Add("Controller, Service");
+            cbx_createFileMode.Items.Add("Controller");
+            cbx_createFileMode.Items.Add("Service");
+            cbx_createFileMode.Items.Add("DAO");
+
             cbx_engine.SelectedIndex = 0;
             cbx_charset.SelectedIndex = 0;
+            cbx_createFileMode.SelectedIndex = 0;
 
             if (Settings.Default.isTestConnection)
             {
@@ -79,10 +95,10 @@ namespace GoposExcelToDbHelper
 
         private void btn_change_Click(object sender, EventArgs e)
         {
+            tbx_result.Text = string.Empty;
+
             if (!Validation()) return;
             if (!DisassembleExcelData()) return;
-
-            SetLogLine();
 
             SetCreateQuery();
             SetErd();
@@ -91,7 +107,7 @@ namespace GoposExcelToDbHelper
 
             CreateClassFile();
 
-            SetLogLine();
+            SetResultLog();
 
             string toastXmlString =
    $@"<toast><visual>
@@ -113,7 +129,25 @@ namespace GoposExcelToDbHelper
             if (excelData.Equals(string.Empty))
             {
                 Msg.Info("변환할 텍스트가 입력되지 않았습니다.");
+                SetLog("변환할 텍스트가 입력되지 않았습니다.", false);
+
                 tbx_text.Focus();
+
+                return false;
+            }
+
+            if (cbx_createFile.Checked && string.IsNullOrEmpty(tbx_projectPath.Text))
+            {
+                Msg.Info("프로젝트 경로를 입력해주세요.");
+                SetLog("프로젝트 경로를 입력해주세요.", false);
+
+                return false;
+            }
+
+            if (cbx_createFile.Checked && string.IsNullOrEmpty(tbx_createFilePath.Text))
+            {
+                Msg.Info("파일을 생성할 패키지명을 입력해주세요.");
+                SetLog("파일을 생성할 패키지명을 입력해주세요.", false);
 
                 return false;
             }
@@ -137,6 +171,7 @@ namespace GoposExcelToDbHelper
             if (rows.First().Split('\t').Length != 13)
             {
                 Msg.Info("복사한 엑셀 컬럼수를 확인해주세요.\n\n엔티티명, 테이블명, 컬럼명, 속성명, 속성타입, 도메인, 설명, PK, NOT NULL, UNIQUE, INDEX, FK, 기본값");
+                SetLog("복사한 엑셀 컬럼수를 확인해주세요.\n\n엔티티명, 테이블명, 컬럼명, 속성명, 속성타입, 도메인, 설명, PK, NOT NULL, UNIQUE, INDEX, FK, 기본값", false);
                 return false;
             }
 
@@ -251,7 +286,7 @@ namespace GoposExcelToDbHelper
 
 left to right direction
 
-entity ""{table}"" as {table.ToSnakeCase()} {{{pkErd}{separateLine}{colErd}
+entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
 }}
 
 @enduml";
@@ -269,15 +304,32 @@ entity ""{table}"" as {table.ToSnakeCase()} {{{pkErd}{separateLine}{colErd}
 
         private void SetMapper()
         {
-            var mapper = MybatisMapperMaker.GetMapper(table, cols);
+            var package = string.IsNullOrEmpty(tbx_createFilePath.Text) ? @"""패키지명""" : tbx_createFilePath.Text;
+            var mapper = MybatisMapperMaker.GetMapper(package, table, cols);
 
-            gb_mapper.Text = $"{table.ToSnakeCase("")}Mapper.xml";
+            gb_mapper.Text = $"{table.ToCamelCase("")}Mapper.xml";
             tbx_mapper.Text = mapper;
         }
 
-        private void SetLogLine()
+        private void SetResultLog()
         {
-            lbx_log.Items.Add("==========================================");
+            lbx_log.Items.Add("========================================================");
+            SetLog($"테이블 자동 생성여부 : {cbx_createTable.Checked}", false);
+            SetLog($"클래스 파일 자동 생성여부 : {cbx_createFile.Checked}");
+            if (cbx_createFile.Checked)
+            {
+                SetLog($"클래스 파일 생성 모드 : {cbx_createFileMode.SelectedItem.ToString()}");
+                SetLog($"클래스 파일 생성 경로 : \\src\\main\\java\\{tbx_createFilePath.Text}");
+            }
+
+            lbx_log.Items.Add("========================================================");
+        }
+
+        private void SetLog(string value, bool isNewLine = true)
+        {
+            lbx_log.Items.Add(value);
+            string newLine = isNewLine ? Environment.NewLine : string.Empty;
+            tbx_result.Text += $"{newLine}{value}";
         }
 
         private void CreateClassFile()
@@ -290,11 +342,43 @@ entity ""{table}"" as {table.ToSnakeCase()} {{{pkErd}{separateLine}{colErd}
             DirectoryInfo di = new DirectoryInfo(projectPath);
             if (!di.Exists)
             {
-                Msg.Warning("폴더가 존재하지 않습니다.");
+                Msg.Warning("프로젝트 폴더가 존재하지 않습니다.");
+                SetLog("프로젝트 폴더가 존재하지 않습니다.", false);
                 return;
             }
 
             // src\main\java\gopos
+            var packagePath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}";
+            var servicePath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}\service";
+            var daoPath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}\dao";
+            DirectoryInfo package = new DirectoryInfo(packagePath);
+            DirectoryInfo service = new DirectoryInfo(servicePath);
+            DirectoryInfo dao = new DirectoryInfo(daoPath);
+
+            package.Create();
+            service.Create();
+            dao.Create();
+
+            switch (cbx_createFileMode.SelectedIndex)
+            {
+                case All:
+                    ClassFileMaker.Controller(packagePath, tbx_createFilePath.Text, table.ToCamelCase(""));
+                    ClassFileMaker.Service(servicePath, tbx_createFilePath.Text, table.ToCamelCase(""));
+                    ClassFileMaker.Dao(daoPath, tbx_createFilePath.Text, table.ToCamelCase(""));
+                    break;
+
+                case Controller:
+                    ClassFileMaker.Controller(packagePath, tbx_createFilePath.Text, table.ToCamelCase(""));
+                    break;
+
+                case Service:
+                    ClassFileMaker.Service(servicePath, tbx_createFilePath.Text, table.ToCamelCase(""));
+                    break;
+
+                case Dao:
+                    ClassFileMaker.Dao(daoPath, tbx_createFilePath.Text, table.ToCamelCase(""));
+                    break;
+            }
         }
 
         private void btn_findPath_Click(object sender, EventArgs e)
@@ -337,6 +421,8 @@ entity ""{table}"" as {table.ToSnakeCase()} {{{pkErd}{separateLine}{colErd}
             if (!Settings.Default.isTestConnection)
             {
                 Msg.Info("DB 연결을 먼저 진행해주세요.");
+                SetLog("DB 연결을 먼저 진행해주세요.", false);
+
                 cbx_createTable.Checked = false;
             }
         }

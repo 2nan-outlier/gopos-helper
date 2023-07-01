@@ -141,6 +141,8 @@ namespace GoposExcelToDbHelper.UI.Popup
         {
             // 텍스트가 변경되면 TestConnection 여부 false
             isTestConnection = false;
+            Settings.Default.isTestConnection = false;
+            Settings.Default.Save();
         }
     }
 }
