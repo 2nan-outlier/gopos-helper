@@ -32,7 +32,7 @@ namespace GoposExcelToDbHelper.Utils
         {
             var sql = new MySqlConnectionStringBuilder();
             sql.Server = host;
-            sql.Port = 3301;
+            sql.Port = (uint)port;
             sql.Database = schema;
             sql.UserID = id;
             sql.Password = pw;
@@ -57,8 +57,24 @@ namespace GoposExcelToDbHelper.Utils
             return true;
         }
 
-        public bool Execute()
+        public bool CreateTable(string query)
         {
+            try
+            {
+                using (var conn = GetMysqlConnection())
+                {
+                    conn.Open();
+                    if (conn.State != ConnectionState.Open) return false;
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
             return true;
         }
     }

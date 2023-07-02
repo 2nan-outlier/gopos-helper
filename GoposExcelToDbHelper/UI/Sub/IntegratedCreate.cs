@@ -111,20 +111,6 @@ namespace GoposExcelToDbHelper
             CreateTable();
 
             SetResultLog();
-
-            string toastXmlString =
-   $@"<toast><visual>
-            <binding template='ToastGeneric'>
-            <text>{"흐응"}</text>
-            <text>{"호오"}</text>
-            </binding>
-        </visual></toast>";
-            var xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(toastXmlString);
-            var toastNotification = new ToastNotification(xmlDoc);
-
-            var toastNotifier = ToastNotificationManager.CreateToastNotifier("tets");
-            toastNotifier.Show(toastNotification);
         }
 
         private bool Validation()
@@ -154,6 +140,31 @@ namespace GoposExcelToDbHelper
 
                 return false;
             }
+
+            var msg = string.Empty;
+            msg += "아래 설정이 맞습니까?";
+            msg += "\r\n";
+            msg += $"\r\n테이블 자동 생성여부 : {cbx_createTable.Checked}";
+            if (cbx_createTable.Checked)
+            {
+                msg += $"\r\nDB Host : {Settings.Default.dbHost}";
+                msg += $"\r\nDB Port : {Settings.Default.dbPort}";
+                msg += $"\r\nDB Schema : {Settings.Default.dbSchema}";
+                msg += "\r\n";
+            }
+            msg += $"\r\n클래스 파일 자동 생성여부 : {cbx_createFile.Checked}";
+            if (cbx_createFile.Checked)
+            {
+                msg += $"\r\n프로젝트 경로 : {tbx_projectPath.Text}";
+                msg += $"\r\n파일 생성 경로 : \\src\\main\\java\\gopos\\{tbx_createFilePath.Text}";
+            }
+            msg += "\r\n";
+            msg += "\r\n예를 누르면 작업을 실행합니다.";
+
+            if (Msg.Ask(msg).Equals(DialogResult.No))
+            {
+                return false;
+            };
 
             return true;
         }
@@ -338,10 +349,7 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
 
         private void CreateClassFile()
         {
-            if (!cbx_createFile.Checked)
-            {
-                return;
-            }
+            if (!cbx_createFile.Checked) return;
 
             DirectoryInfo di = new DirectoryInfo(projectPath);
             if (!di.Exists)
@@ -400,7 +408,29 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
 
         private void CreateTable()
         {
+            if (!cbx_createTable.Checked) return;
 
+            var host = Settings.Default.dbHost;
+            var port = int.Parse(Settings.Default.dbPort);
+            var schema = Settings.Default.dbSchema;
+            var userId = Settings.Default.dbUserId;
+            var userPw = Settings.Default.dbUserPw;
+
+            MysqlUtils mysql = new MysqlUtils(
+                host,
+                port,
+                schema,
+                userId,
+                userPw
+            );
+
+            if (!mysql.CreateTable(tbx_create.Text))
+            {
+                Msg.Warning("테이블 생성에 실패했습니다.");
+                SetLog("테이블 생성에 실패했습니다.", false);
+
+                return;
+            }
         }
 
         private void btn_findPath_Click(object sender, EventArgs e)
