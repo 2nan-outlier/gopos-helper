@@ -107,8 +107,8 @@ namespace GoposExcelToDbHelper
             SetVo();
             SetMapper();
 
+            if (!CreateTable()) return;
             CreateClassFile();
-            CreateTable();
 
             SetResultLog();
         }
@@ -359,7 +359,6 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
                 return;
             }
 
-            // src\main\java\gopos
             var packagePath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}";
             var servicePath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}\service";
             var daoPath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}\dao";
@@ -406,9 +405,9 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
             }
         }
 
-        private void CreateTable()
+        private bool CreateTable()
         {
-            if (!cbx_createTable.Checked) return;
+            if (!cbx_createTable.Checked) return true;
 
             var host = Settings.Default.dbHost;
             var port = int.Parse(Settings.Default.dbPort);
@@ -424,13 +423,23 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
                 userPw
             );
 
+            if (!mysql.SelectTable(table))
+            {
+                Msg.Warning($"{table} 테이블이 이미 존재합니다.");
+                SetLog($"{table} 테이블이 이미 존재합니다.", false);
+
+                return false;
+            }
+
             if (!mysql.CreateTable(tbx_create.Text))
             {
                 Msg.Warning("테이블 생성에 실패했습니다.");
                 SetLog("테이블 생성에 실패했습니다.", false);
 
-                return;
+                return false;
             }
+
+            return true;
         }
 
         private void btn_findPath_Click(object sender, EventArgs e)
