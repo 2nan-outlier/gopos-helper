@@ -22,10 +22,12 @@ namespace GoposExcelToDbHelper
     public partial class IntegratedCreate : MetroFramework.Forms.MetroForm
     {
         private const string springBootPath = @"\src\main\java\gopos\";
+        private const string springBootMapperPath = @"\src\main\resources\mapper\";
         private const int All = 0;
         private const int Controller = 1;
         private const int Service = 2;
         private const int Dao = 3;
+        private const int Mapper = 4;
 
 
         private string excelData => tbx_text.Text;
@@ -77,11 +79,11 @@ namespace GoposExcelToDbHelper
             cbx_charset.Items.Add("utf8mb4");
 
             // 파일 생성 모드
-            cbx_createFileMode.Items.Add("Controller, Service, DAO");
-            cbx_createFileMode.Items.Add("Controller, Service");
+            cbx_createFileMode.Items.Add("All");
             cbx_createFileMode.Items.Add("Controller");
             cbx_createFileMode.Items.Add("Service");
             cbx_createFileMode.Items.Add("DAO");
+            cbx_createFileMode.Items.Add("Mapper");
 
             cbx_engine.SelectedIndex = 0;
             cbx_charset.SelectedIndex = 0;
@@ -106,6 +108,7 @@ namespace GoposExcelToDbHelper
             SetMapper();
 
             CreateClassFile();
+            CreateTable();
 
             SetResultLog();
 
@@ -314,12 +317,13 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
         private void SetResultLog()
         {
             lbx_log.Items.Add("========================================================");
+            lbx_log.Items.Add("실행 시간 : " + DateTime.Today.ToString("yyyy-MM-dd") + " " + DateTime.Now.ToString("HH:mm:ss"));
             SetLog($"테이블 자동 생성여부 : {cbx_createTable.Checked}", false);
             SetLog($"클래스 파일 자동 생성여부 : {cbx_createFile.Checked}");
             if (cbx_createFile.Checked)
             {
                 SetLog($"클래스 파일 생성 모드 : {cbx_createFileMode.SelectedItem.ToString()}");
-                SetLog($"클래스 파일 생성 경로 : \\src\\main\\java\\{tbx_createFilePath.Text}");
+                //SetLog($"클래스 파일 생성 경로 : \\src\\main\\java\\{tbx_createFilePath.Text}");
             }
 
             lbx_log.Items.Add("========================================================");
@@ -351,13 +355,20 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
             var packagePath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}";
             var servicePath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}\service";
             var daoPath = $@"{projectPath}{springBootPath}{tbx_createFilePath.Text}\dao";
+            var mapperPath = $@"{projectPath}{springBootMapperPath}{tbx_createFilePath.Text}";
             DirectoryInfo package = new DirectoryInfo(packagePath);
             DirectoryInfo service = new DirectoryInfo(servicePath);
             DirectoryInfo dao = new DirectoryInfo(daoPath);
+            DirectoryInfo mapper = new DirectoryInfo(mapperPath);
 
             package.Create();
             service.Create();
             dao.Create();
+            mapper.Create();
+
+            // mybatis mapper
+            //string[] lines = MybatisMapperMaker.GetMapper(tbx_createFilePath.Text, table, cols).Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            List<string> lines = new List<string> { MybatisMapperMaker.GetMapper(tbx_createFilePath.Text, table, cols) };
 
             switch (cbx_createFileMode.SelectedIndex)
             {
@@ -365,6 +376,8 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
                     ClassFileMaker.Controller(packagePath, tbx_createFilePath.Text, table.ToCamelCase(""));
                     ClassFileMaker.Service(servicePath, tbx_createFilePath.Text, table.ToCamelCase(""));
                     ClassFileMaker.Dao(daoPath, tbx_createFilePath.Text, table.ToCamelCase(""));
+                    ClassFileMaker.Mapper(mapperPath, tbx_createFilePath.Text, table.ToCamelCase(""), lines);
+
                     break;
 
                 case Controller:
@@ -378,7 +391,16 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
                 case Dao:
                     ClassFileMaker.Dao(daoPath, tbx_createFilePath.Text, table.ToCamelCase(""));
                     break;
+
+                case Mapper:
+                    ClassFileMaker.Mapper(mapperPath, tbx_createFilePath.Text, table.ToCamelCase(""), lines);
+                    break;
             }
+        }
+
+        private void CreateTable()
+        {
+
         }
 
         private void btn_findPath_Click(object sender, EventArgs e)
@@ -431,6 +453,26 @@ entity ""{table}"" as {table.ToCamelCase()} {{{pkErd}{separateLine}{colErd}
         {
             Settings.Default.isCreateTable = cbx_createTable.Checked;
             Settings.Default.Save();
+        }
+
+        private void btn_clearLog_Click(object sender, EventArgs e)
+        {
+            lbx_log.Items.Clear();
+        }
+
+        private void btn_createCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tbx_create.Text);
+        }
+
+        private void btn_erdCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tbx_erd.Text);
+        }
+
+        private void btn_mapperCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tbx_mapper.Text);
         }
     }
 }

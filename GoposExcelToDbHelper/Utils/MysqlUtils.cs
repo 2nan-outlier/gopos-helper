@@ -56,5 +56,10 @@ namespace GoposExcelToDbHelper.Utils
             }
             return true;
         }
+
+        public bool Execute()
+        {
+            return true;
+        }
     }
 }

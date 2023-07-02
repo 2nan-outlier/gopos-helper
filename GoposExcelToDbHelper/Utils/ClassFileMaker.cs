@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GoposExcelToDbHelper.VO;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -75,6 +76,11 @@ namespace GoposExcelToDbHelper.Utils
             };
 
             File.WriteAllLines($@"{path}\{fileNm}DAO.java", lines);
+        }
+
+        public static void Mapper(string path, string package, string fileNm, List<string> lines)
+        {
+            File.WriteAllLines($@"{path}\{fileNm}Mapper.xml", lines);
         }
     }
 }

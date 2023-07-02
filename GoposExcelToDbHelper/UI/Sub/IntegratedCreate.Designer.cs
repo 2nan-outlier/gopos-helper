@@ -59,17 +59,14 @@
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.tb_create = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_createCopy = new MetroFramework.Controls.MetroButton();
             this.gb_create = new System.Windows.Forms.GroupBox();
             this.tbx_create = new MetroFramework.Controls.MetroTextBox();
             this.tp_erd = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.gb_erd = new System.Windows.Forms.GroupBox();
             this.tbx_erd = new MetroFramework.Controls.MetroTextBox();
             this.tp_mapper = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.metroButton4 = new MetroFramework.Controls.MetroButton();
             this.gb_mapper = new System.Windows.Forms.GroupBox();
             this.tbx_mapper = new MetroFramework.Controls.MetroTextBox();
             this.tp_log = new System.Windows.Forms.TabPage();
@@ -583,28 +580,15 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.btn_createCopy, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.gb_create, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(845, 472);
             this.tableLayoutPanel3.TabIndex = 11;
-            // 
-            // btn_createCopy
-            // 
-            this.btn_createCopy.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_createCopy.Location = new System.Drawing.Point(3, 424);
-            this.btn_createCopy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_createCopy.Name = "btn_createCopy";
-            this.btn_createCopy.Size = new System.Drawing.Size(839, 46);
-            this.btn_createCopy.TabIndex = 13;
-            this.btn_createCopy.Text = "복사";
-            this.btn_createCopy.UseSelectable = true;
             // 
             // gb_create
             // 
@@ -614,7 +598,7 @@
             this.gb_create.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gb_create.Name = "gb_create";
             this.gb_create.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gb_create.Size = new System.Drawing.Size(839, 414);
+            this.gb_create.Size = new System.Drawing.Size(839, 464);
             this.gb_create.TabIndex = 10;
             this.gb_create.TabStop = false;
             this.gb_create.Text = "Create 쿼리";
@@ -647,7 +631,7 @@
             this.tbx_create.SelectionLength = 0;
             this.tbx_create.SelectionStart = 0;
             this.tbx_create.ShortcutsEnabled = true;
-            this.tbx_create.Size = new System.Drawing.Size(833, 388);
+            this.tbx_create.Size = new System.Drawing.Size(833, 438);
             this.tbx_create.TabIndex = 2;
             this.tbx_create.UseSelectable = true;
             this.tbx_create.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -669,28 +653,15 @@
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.metroButton2, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.gb_erd, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(845, 472);
             this.tableLayoutPanel4.TabIndex = 11;
-            // 
-            // metroButton2
-            // 
-            this.metroButton2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroButton2.Location = new System.Drawing.Point(3, 424);
-            this.metroButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(839, 46);
-            this.metroButton2.TabIndex = 13;
-            this.metroButton2.Text = "로그 초기화";
-            this.metroButton2.UseSelectable = true;
             // 
             // gb_erd
             // 
@@ -700,7 +671,7 @@
             this.gb_erd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gb_erd.Name = "gb_erd";
             this.gb_erd.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gb_erd.Size = new System.Drawing.Size(839, 414);
+            this.gb_erd.Size = new System.Drawing.Size(839, 464);
             this.gb_erd.TabIndex = 10;
             this.gb_erd.TabStop = false;
             this.gb_erd.Text = "ERD";
@@ -733,7 +704,7 @@
             this.tbx_erd.SelectionLength = 0;
             this.tbx_erd.SelectionStart = 0;
             this.tbx_erd.ShortcutsEnabled = true;
-            this.tbx_erd.Size = new System.Drawing.Size(833, 388);
+            this.tbx_erd.Size = new System.Drawing.Size(833, 438);
             this.tbx_erd.TabIndex = 2;
             this.tbx_erd.UseSelectable = true;
             this.tbx_erd.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -755,28 +726,15 @@
             // 
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.metroButton4, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.gb_mapper, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(845, 472);
             this.tableLayoutPanel6.TabIndex = 11;
-            // 
-            // metroButton4
-            // 
-            this.metroButton4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroButton4.Location = new System.Drawing.Point(3, 424);
-            this.metroButton4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.metroButton4.Name = "metroButton4";
-            this.metroButton4.Size = new System.Drawing.Size(839, 46);
-            this.metroButton4.TabIndex = 13;
-            this.metroButton4.Text = "로그 초기화";
-            this.metroButton4.UseSelectable = true;
             // 
             // gb_mapper
             // 
@@ -786,7 +744,7 @@
             this.gb_mapper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gb_mapper.Name = "gb_mapper";
             this.gb_mapper.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gb_mapper.Size = new System.Drawing.Size(839, 414);
+            this.gb_mapper.Size = new System.Drawing.Size(839, 464);
             this.gb_mapper.TabIndex = 10;
             this.gb_mapper.TabStop = false;
             this.gb_mapper.Text = "Mapper";
@@ -819,7 +777,7 @@
             this.tbx_mapper.SelectionLength = 0;
             this.tbx_mapper.SelectionStart = 0;
             this.tbx_mapper.ShortcutsEnabled = true;
-            this.tbx_mapper.Size = new System.Drawing.Size(833, 388);
+            this.tbx_mapper.Size = new System.Drawing.Size(833, 438);
             this.tbx_mapper.TabIndex = 2;
             this.tbx_mapper.UseSelectable = true;
             this.tbx_mapper.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -834,7 +792,7 @@
             this.tp_log.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tp_log.Size = new System.Drawing.Size(851, 476);
             this.tp_log.TabIndex = 5;
-            this.tp_log.Text = "변환 결과 Log";
+            this.tp_log.Text = "실행 결과 Log";
             this.tp_log.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
@@ -863,6 +821,7 @@
             this.btn_clearLog.TabIndex = 13;
             this.btn_clearLog.Text = "로그 초기화";
             this.btn_clearLog.UseSelectable = true;
+            this.btn_clearLog.Click += new System.EventHandler(this.btn_clearLog_Click);
             // 
             // groupBox6
             // 
@@ -1007,15 +966,12 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private MetroFramework.Controls.MetroButton btn_clearLog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private MetroFramework.Controls.MetroButton btn_createCopy;
         private System.Windows.Forms.GroupBox gb_create;
         private MetroFramework.Controls.MetroTextBox tbx_create;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private MetroFramework.Controls.MetroButton metroButton2;
         private System.Windows.Forms.GroupBox gb_erd;
         private MetroFramework.Controls.MetroTextBox tbx_erd;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private MetroFramework.Controls.MetroButton metroButton4;
         private System.Windows.Forms.GroupBox gb_mapper;
         private MetroFramework.Controls.MetroTextBox tbx_mapper;
         private MetroFramework.Controls.MetroTextBox tbx_projectPath;

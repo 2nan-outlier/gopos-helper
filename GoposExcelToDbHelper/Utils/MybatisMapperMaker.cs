@@ -32,9 +32,9 @@ namespace GoposExcelToDbHelper.Utils
                 // insert, update, delete는 CREATED_AT, UPDATED_AT 사용 안함
                 if (col.name.Equals("CREATED_AT") || col.name.Equals("UPDATED_AT")) continue;
                 insertCols += $"{col.name}";
-                insertCols += cols.IndexOf(col) == cols.Count - 1 ? string.Empty : ",";
+                insertCols += cols.IndexOf(col) == cols.Count - 1 ? string.Empty : ", ";
 
-                insertVals += $"\r\n      {col.name} = #{{{col.name.ToCamelCase()}}}";
+                insertVals += $"\r\n        #{{{col.name.ToCamelCase()}}}";
                 insertVals += cols.IndexOf(col) == cols.Count - 1 ? string.Empty : ",";
                 // ==================================================================
 
@@ -58,9 +58,9 @@ namespace GoposExcelToDbHelper.Utils
                 // ==================================================================
             }
 
-            if (insertCols.Last().Equals(','))
+            if (insertCols.Substring(insertCols.Length - 2).Equals(", "))
             {
-                insertCols = insertCols.Substring(0, insertCols.Length - 1);
+                insertCols = insertCols.Substring(0, insertCols.Length - 2);
             }
             if (insertVals.Last().Equals(','))
             {
@@ -92,7 +92,9 @@ namespace GoposExcelToDbHelper.Utils
             mapper += $"\r\n      {table}";
             mapper += $"\r\n      ({insertCols})";
             mapper += $"\r\n    VALUES";
+            mapper += $"\r\n      (";
             mapper += $"{insertVals}";
+            mapper += $"\r\n      )";
             mapper += $"\r\n  </insert>";
             mapper += $"\r\n";
             mapper += $"\r\n  <update id=\"{table.ToCamelCase("update")}\" parameterType=\"HashMap\">";
